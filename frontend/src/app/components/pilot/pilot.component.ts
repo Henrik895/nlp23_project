@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { PilotService } from '../../services/pilot/pilot.service';
 
 @Component({
   selector: 'app-pilot',
@@ -11,16 +12,18 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class PilotComponent {
   loading: boolean = false;
 
+  constructor(private readonly pilotService: PilotService) {}
+
   inputForm: FormGroup = new FormGroup({
     input: new FormControl(''),
   });
 
   async submit(): Promise<void> {
-    const currentText: string | undefined = this.inputForm.get('text')?.value;
-    if (!currentText) return;
+    const currentInput: string = this.inputForm.get('input')!.value;
 
     this.loading = true;
-    // TODO: api call
+    const completedText: string = await this.pilotService.complete(currentInput);
+    this.inputForm.get('input')!.setValue(completedText);
     this.loading = false;
   }
 
