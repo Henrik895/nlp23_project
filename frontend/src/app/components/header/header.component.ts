@@ -37,7 +37,6 @@ export class HeaderComponent implements OnInit {
         this.aboutActive = true;
         break;
       }
-      case '/pilot':
       default: {
         this.pilotActive = true;
         break;

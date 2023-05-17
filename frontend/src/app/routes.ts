@@ -20,5 +20,6 @@ export const routes: Route[] = [
     {
         path: '**',
         component: PilotComponent,
+        redirectTo: '',
     },
 ];
