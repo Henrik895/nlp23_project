@@ -3,14 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
 import { ResponseDto } from '../dtos/response.dto';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PilotApiService {
   // Currently hardcoded
-  private readonly model: string = 'wsb';
-  private readonly apiUrl = 'http://localhost:3000/models';
+  private readonly model = 'wsb';
+  private readonly api = `${environment.api}/models`;
 
   constructor(
     private readonly http: HttpClient,
@@ -18,7 +19,7 @@ export class PilotApiService {
   ) { }
 
   complete(text: string): Observable<ResponseDto | undefined> {
-    const url = `${this.apiUrl}/${this.model}`;
+    const url = `${this.api}/${this.model}`;
     return this.http.post<ResponseDto>(url, {text}, {headers: {'Content-Type': 'application/json'}})
       .pipe(
         catchError((err) => {

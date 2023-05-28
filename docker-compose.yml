@@ -14,3 +14,10 @@ services:
     container_name: backend
     build: 
       context: ./backend
+    env_file:
+      - .env
+
+  model_wsb:
+    container_name: model_wsb
+    build:
+      context: ./models/wallstreetbets
