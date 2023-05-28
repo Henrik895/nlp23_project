@@ -18,9 +18,9 @@ Run the api with `uvicorn api:app --host 0.0.0.0 --port 8000`
 ## Container
 
 Make sure that the folder, where api.py is located, has the model and tokenizer folders with files that are created when saving the model.
-If not then change ENV variables in the Dockerfile.
+If not then change ARG variables in the beginning of the Dockerfile.
 
-Run `docker build -t api .` in to build the container and and start the api with `docker run -p8000:8000 api`.
+Run `docker build -t api .` in the same folder where Dockerfile is located to build the container and and start the api with `docker run -p8000:8000 api`.
 
 ## Check
 

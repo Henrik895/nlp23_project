@@ -1,8 +1,11 @@
+
 FROM python:3.10
 
-ENV MODEL_PATH=model
+ARG MODEL_PATH=model
+ARG TOKENIZER_PATH=tokenizer
 
-ENV TOKENIZER_PATH=tokenizer
+ENV MODEL_PATH=${MODEL_PATH}
+ENV TOKENIZER_PATH=${TOKENIZER_PATH}
 
 WORKDIR /
 
@@ -11,9 +14,7 @@ COPY ./requirements.txt /requirements.txt
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY ./api.py /api.py
-
-COPY ./model /model
-
-COPY ./tokenizer /tokenizer
+COPY ./${MODEL_PATH} /${MODEL_PATH}
+COPY ./${TOKENIZER_PATH} /${TOKENIZER_PATH}
 
 CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
