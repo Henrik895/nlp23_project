@@ -1,1 +1,30 @@
-<p>models works!</p>
+<div class="h-full w-full flex flex-col items-center px-16 py-4">
+    <div class="w-3/5 flex flex-col gap-4">
+        <app-chosen-model [model]="activeModel()"></app-chosen-model>
+
+        <!-- Not ideal, but does the trick -->
+        <div class="grid grid-cols-2 border border-blue-700">
+
+            <div class="flex items-center justify-center bg-blue-700 text-white">
+                <span>Name</span>
+            </div>
+            <div class="flex items-center justify-center bg-blue-700 text-white">
+                <span>Type</span>
+            </div>
+
+            <div 
+                *ngFor="let model of models$ | async" 
+                class="col-span-full grid grid-cols-2 cursor-pointer hover:bg-blue-100"
+                (click)="selectModel(model)">
+
+                <div class="flex items-center justify-center border-r border-blue-700">
+                    <span>{{ model.fullName }}</span>
+                </div>
+                <div class="flex items-center justify-center">
+                    <span>{{ model.type }}</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
