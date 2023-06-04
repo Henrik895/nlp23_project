@@ -19,7 +19,7 @@ def complete(text):
     model = GPT2LMHeadModel.from_pretrained(model_path, pad_token_id=tokenizer.eos_token_id)
 
     input_ids = tokenizer.encode(text, return_tensors='pt')
-    output = model.generate(input_ids, do_sample=True, max_length=250, top_p=0.95, top_k=0)[0]
+    output = model.generate(input_ids, do_sample=True, max_length=250, top_p=0.90, top_k=15)[0]
     completed_text = tokenizer.decode(output, skip_special_tokens=True)
     return completed_text
 
