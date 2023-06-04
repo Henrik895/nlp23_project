@@ -6,10 +6,17 @@ export interface Model {
 }
 
 export const models: Model[] = [
+    // Hackish temporary solution
+    {
+        name: 'crypto',
+        fullName: 'Cryptocurrency',
+        type: 'GPT-2 (117M)',
+        api: process.env.NODE_ENV === 'production' ? 'http://model_crypto:8001' : 'http://127.0.0.1:8001'
+    },
     {
         name: 'wsb',
         fullName: 'Wall Street Bets',
-        type: 'GPT-2 small',
-        api: process.env.NODE_ENV === 'production' ? 'http://model_wsb:8003' : 'http://127.0.0.1:8003', // Hackish temporary solution
+        type: 'GPT-2 (117M)',
+        api: process.env.NODE_ENV === 'production' ? 'http://model_wsb:8003' : 'http://127.0.0.1:8003',
     }
 ];

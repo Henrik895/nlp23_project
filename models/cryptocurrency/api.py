@@ -13,7 +13,7 @@ class RequestBody(BaseModel):
 def complete(text):
     model_path = os.getenv('MODEL_PATH', "model")
     tokenizer_path = os.getenv('TOKENIZER_PATH', "tokenizer")
-    
+
     tokenizer = GPT2Tokenizer.from_pretrained(tokenizer_path)
     tokenizer.pad_token = tokenizer.eos_token
     model = GPT2LMHeadModel.from_pretrained(model_path, pad_token_id=tokenizer.eos_token_id)

@@ -18,9 +18,14 @@ services:
       - .env
 
   model_classifier:
-    container_name: classifier
+    container_name: model_classifier
     build:
       context: ./models/classifier
+
+  model_crypto:
+    container_name: model_crypto
+    build: 
+      context: ./models/cryptocurrency
 
   model_wsb:
     container_name: model_wsb

@@ -14,7 +14,7 @@
 
             <div 
                 *ngFor="let model of models$ | async" 
-                class="col-span-full grid grid-cols-2 cursor-pointer hover:bg-blue-100"
+                class="col-span-full grid grid-cols-2 cursor-pointer hover:bg-blue-100 border-b border-blue-700"
                 (click)="selectModel(model)">
 
                 <div class="flex items-center justify-center border-r border-blue-700">
