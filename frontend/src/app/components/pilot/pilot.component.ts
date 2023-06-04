@@ -4,6 +4,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { PilotService } from '../../services/pilot/pilot.service';
 import { ModelSelectorService } from '../../services/model-selector/model-selector.service';
 import { ChosenModelComponent } from '../chosen-model/chosen-model.component';
+import { ClassifierResponseDto } from '../../services/dtos/classifier-response.dto';
+import { ClassifierService } from '../../services/classifier/classifier.service';
 
 @Component({
   selector: 'app-pilot',
@@ -13,10 +15,12 @@ import { ChosenModelComponent } from '../chosen-model/chosen-model.component';
 })
 export class PilotComponent {
   loading: boolean = false;
+  classification: ClassifierResponseDto | undefined;
 
   constructor(
     private readonly modelSelectorService: ModelSelectorService,
-    private readonly pilotService: PilotService
+    private readonly pilotService: PilotService,
+    private readonly classifierService: ClassifierService,
   ) {}
 
   inputForm: FormGroup = new FormGroup({
@@ -29,12 +33,18 @@ export class PilotComponent {
     const currentInput: string = this.inputForm.get('input')!.value;
 
     this.loading = true;
+    this.classification = undefined;
+
     const completedText: string = await this.pilotService.complete(currentInput);
+    
     this.inputForm.get('input')!.setValue(completedText);
     this.loading = false;
+
+    this.classification = await this.classifierService.classify(completedText);
   }
 
   resetForm(): void {
+    this.classification = undefined;
     this.inputForm.reset({
       text: '',
     });

@@ -5,7 +5,11 @@
         formControlName="input" 
         class="w-full grow border border-blue-700 p-2 outline-none rounded-sm focus-within:border-2 text-lg">
       </textarea>
-      <div class="self-end flex gap-4">
+      <div class="self-end flex justify-end gap-4 items-center w-full">
+        <label
+          *ngIf="classification" 
+          class="mr-auto">Result: {{ classification.label + " (" + classification.confidence + '%)' }}
+        </label>
         <button
           type="button"
           class="border border-orange-500 p-2 text-lg rounded-sm text-orange-500 hover:bg-orange-500 hover:text-white transition-colors ease-in-out duration-300"
